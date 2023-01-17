@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Load secrets into env vars for building config
-if [ -r /run/credentials/ldap-bindpw ]; then
-   export LDAP_BINDPW="$(cat /run/credentials/ldap-bindpw)"
+if [ -r /run/secrets/ldap-bindpw ]; then
+   export LDAP_BINDPW="$(cat /run/secrets/ldap-bindpw)"
 fi
 
 # Create config from template
