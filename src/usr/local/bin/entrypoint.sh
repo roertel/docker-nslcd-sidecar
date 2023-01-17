@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 # Load secrets into env vars for building config
-test -r /run/secrets/ldap-bindpw &&
-   export LDAP_BINDPW="$(cat /run/secrets/ldap-bindpw)"
+if [ -r /run/credentials/ldap-bindpw ]; then
+   export LDAP_BINDPW="$(cat /run/credentials/ldap-bindpw)"
+fi
 
 # Create config from template
 test -r /templates/nslcd.conf.tpl && \
