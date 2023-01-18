@@ -11,4 +11,4 @@ or else the sockets won't work right.
 ### Environment
 
 Set the LDAP_URI, LDAP_BASE, LDAP_BINDDN and LDAP_BINDPW (or use a secret
-file named as ldap-bindpw mounted to /run/secrets).
+file named as ldap-bindpw mounted to /run/credentials).

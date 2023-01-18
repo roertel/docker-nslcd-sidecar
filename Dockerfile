@@ -12,12 +12,14 @@ LABEL org.label-schema.build-date = ${BUILD_DATE}
 LABEL org.label-schema.vcs-url = ${VCS_URL}
 LABEL org.label-schema.vcs-ref = ${VCS_REF}
 
-COPY src /
-RUN export DEBIAN_FRONTEND=noninteractive \
- && mkdir -p /run/nslcd/ \
+COPY src/etc /etc
+RUN mkdir -p /run/nslcd/ \
  && apt-get update \
- && apt-get install nslcd libnss-ldapd gettext-base \
- && chown nslcd.nslcd /etc/nslcd.conf /run/nslcd/ \
+ && DEBIAN_FRONTEND=noninteractive apt-get \
+    install nslcd libnss-ldapd gettext-base
+
+COPY src /
+RUN chown nslcd.nslcd /etc/nslcd.conf /run/nslcd/ \
  && chmod 0640 /etc/nslcd.conf \
  && chmod 0755 /usr/local/bin/*
 
