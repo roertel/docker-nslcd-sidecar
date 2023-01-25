@@ -20,10 +20,10 @@ RUN mkdir -p /run/nslcd/ \
 
 COPY src /
 RUN chown 999.999 /etc/nslcd.conf /run/nslcd/ \
- && chmod 0400 /etc/nslcd.conf \
+ && chmod 0660 /etc/nslcd.conf \
  && chmod 0755 /usr/local/bin/*
 
 ENV HOME /home
-USER 999  # nslcd
+USER 999:999
 VOLUME ["/templates", "/run/nslcd", "/run/credentials", "/run/tls"]
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
