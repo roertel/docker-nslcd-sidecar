@@ -19,11 +19,11 @@ RUN mkdir -p /run/nslcd/ \
     install nslcd libnss-ldapd gettext-base
 
 COPY src /
-RUN chown nslcd.nslcd /etc/nslcd.conf /run/nslcd/ \
- && chmod 0640 /etc/nslcd.conf \
+RUN chown 999.999 /etc/nslcd.conf /run/nslcd/ \
+ && chmod 0400 /etc/nslcd.conf \
  && chmod 0755 /usr/local/bin/*
 
 ENV HOME /home
-USER nslcd
+USER 999  # nslcd
 VOLUME ["/templates", "/run/nslcd", "/run/credentials", "/run/tls"]
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
