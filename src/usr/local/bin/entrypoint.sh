@@ -14,6 +14,7 @@ fi
 # Create config from template
 if [ -r /templates/nslcd.conf.tpl ]; then
    envsubst</templates/nslcd.conf.tpl>/etc/nslcd.conf
+   chmod 0400 /etc/nslcd.conf
 fi
 
 # If command starts with an option, prepend nslcd.
@@ -21,6 +22,9 @@ fi
 if [ "${1:0:1}" = '-' ]; then
    set -- /usr/sbin/nslcd --nofork --debug "$@"
 fi
+
+# This prevents an error message from triggering
+touch /var/run/nslcd/socket
 
 # Start nslcd
 exec "$@"
